@@ -9,7 +9,6 @@ stdenv.mkDerivation rec {
     sha256 = "1ch0nyz6lnm49icb528j547c6xq1fcpyar6b5ai4wsw3wfkgz3dy";
   };
 
-  # nativeBuildInputs = [ ncurses flex bison gperf pkgconfig ];
   nativeBuildInputs = [ unzip ];
 
   # src = fetchFromGitHub {
@@ -18,13 +17,6 @@ stdenv.mkDerivation rec {
   #   rev = "";
   #   sha256 = "";
   # };
-
-  # buildPhase = ''
-  #   # Compile conf-idf and mconf-idf
-  #   cd tools/kconfig
-  #   make
-  #   cd ../..
-  # '';
 
   installPhase = ''
     mkdir -p $out
