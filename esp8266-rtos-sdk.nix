@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, ncurses, flex, bison, gperf, pkg-config }:
+{ stdenv, fetchurl, ncurses, flex, bison, gperf, pkgconfig }:
 
 stdenv.mkDerivation rec {
   name = "esp8266-rtos-sdk-${version}";
@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
     sha256 = "0zx1p7kar1mpnkxy6m7w42v5pdmfvy17g3k4xscrj0i1gma8piaz";
   };
 
-  nativeBuildInputs = [ ncurses flex bison gperf pkg-config ];
+  nativeBuildInputs = [ ncurses flex bison gperf pkgconfig ];
 
   # src = fetchFromGitHub {
   #   owner = "espressif";
