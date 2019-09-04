@@ -7,7 +7,7 @@ let
 in
   pkgs.stdenv.mkDerivation {
     name = "esp8266-shell";
-    buildInputs = [ esp8266_rtos_sdk xtensa-lx106 pkgs.python27Packages.pyserial pkgs.python27Packages.cryptography ];
+    buildInputs = [ esp8266_rtos_sdk xtensa-lx106 pkgs.python27Packages.pyserial pkgs.python27Packages.cryptography pkgs.python27Packages.future ];
     shellHook = ''
       export LANG=en_US.UTF-8
       export IDF_PATH=${esp8266_rtos_sdk}
