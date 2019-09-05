@@ -1,0 +1,12 @@
+diff --git a/nix/store/41822y5sfsnlzd6sg89941rcaacnb1yn-makeEspArduino-4.19.0/makeEspArduino.mk b/makeEspArduino.mk
+index b09091e..1c85569 100644
+--- a/nix/store/41822y5sfsnlzd6sg89941rcaacnb1yn-makeEspArduino-4.19.0/makeEspArduino.mk
++++ b/makeEspArduino.mk
+@@ -525,6 +525,7 @@ foreach my $$fn (@ARGV) {
+ $$v{'runtime.tools.xtensa-lx106-elf-gcc.path'} ||= '$$(COMP_PATH)';
+ $$v{'runtime.tools.xtensa-esp32-elf-gcc.path'} ||= '$$(COMP_PATH)';
+ $$v{'runtime.tools.esptool.path'} ||= '$$(ESPTOOL_PATH)';
++$$v{'runtime.tools.python.path'} ||= '$$(PY_PATH)';
+ 
+ die "* Unknown board $$board\n" unless $$board_defined;
+ print "# Board definitions\n";

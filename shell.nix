@@ -27,6 +27,7 @@ in
       export IDF_PATH=${esp8266_rtos_sdk}
       export ESP_ROOT=${esp8266_arduino}
       export COMP_PATH=${xtensa-lx106-arduino}
+      export PY_PATH=${pkgs.python27}/bin
       alias makeesparduino="make -f ${makeEspArduino}/makeEspArduino.mk"
       echo "Welcome!"
     '';

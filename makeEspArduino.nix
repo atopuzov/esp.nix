@@ -15,6 +15,9 @@ stdenv.mkDerivation rec {
   #   rev = "";
   #   sha256 = "";
   # };
+
+  patches = [ ./python-path.patch ];
+
   installPhase = ''
     mkdir -p $out
     cp -ra * $out
