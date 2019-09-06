@@ -15,6 +15,7 @@ let
   xtensa-lx106-arduino = pkgs.callPackage ./xtensa-lx106-arduino.nix {};
   makeEspArduino = pkgs.callPackage ./makeEspArduino.nix {};
   esp-idf-lib = pkgs.callPackage ./esp-idf-lib.nix {};
+  esp-idf = pkgs.callPackage ./esp-idf.nix {};
   xtensa-esp32 = pkgs.callPackage ./xtensa-esp32.nix {};
 in
   pkgs.stdenv.mkDerivation {
@@ -24,7 +25,8 @@ in
       esp-idf-lib
       xtensa-lx106 xtensa-esp32
       makeEspArduino
-      pkgs.python27Packages.pyserial pkgs.python27Packages.cryptography pkgs.python27Packages.future ];
+    ] ++ (with pkgs.python27Packages; [ pyserial cryptography future pyparsing]);
+
     shellHook = ''
       export LANG=en_US.UTF-8
       export IDF_PATH=${esp8266_rtos_sdk}
@@ -34,5 +36,10 @@ in
       export ESP_IDF_LIB=${esp-idf-lib}
       alias makeesparduino="make -f ${makeEspArduino}/makeEspArduino.mk"
       echo "Welcome!"
+      echo "ESP8266 IDF is at ${esp8266_rtos_sdk}"
+      echo "export IDF_PATH=${esp8266_rtos_sdk}"
+
+      echo "ESP32 IDF is at ${esp-idf}"
+      echo "export IDF_PATH=${esp-idf}"
     '';
   }
