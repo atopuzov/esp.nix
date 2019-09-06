@@ -14,12 +14,13 @@ let
   });
   xtensa-lx106-arduino = pkgs.callPackage ./xtensa-lx106-arduino.nix {};
   makeEspArduino = pkgs.callPackage ./makeEspArduino.nix {};
+  xtensa-esp32 = pkgs.callPackage ./xtensa-esp32.nix {};
 in
   pkgs.stdenv.mkDerivation {
     name = "esp8266-shell";
     buildInputs = [
       esp8266_rtos_sdk esp8266_arduino
-      xtensa-lx106
+      xtensa-lx106 xtensa-esp32
       makeEspArduino
       pkgs.python27Packages.pyserial pkgs.python27Packages.cryptography pkgs.python27Packages.future ];
     shellHook = ''
