@@ -14,12 +14,14 @@ let
   });
   xtensa-lx106-arduino = pkgs.callPackage ./xtensa-lx106-arduino.nix {};
   makeEspArduino = pkgs.callPackage ./makeEspArduino.nix {};
+  esp-idf-lib = pkgs.callPackage ./esp-idf-lib.nix {};
   xtensa-esp32 = pkgs.callPackage ./xtensa-esp32.nix {};
 in
   pkgs.stdenv.mkDerivation {
     name = "esp8266-shell";
     buildInputs = [
       esp8266_rtos_sdk esp8266_arduino
+      esp-idf-lib
       xtensa-lx106 xtensa-esp32
       makeEspArduino
       pkgs.python27Packages.pyserial pkgs.python27Packages.cryptography pkgs.python27Packages.future ];
@@ -29,6 +31,7 @@ in
       export ESP_ROOT=${esp8266_arduino}
       export COMP_PATH=${xtensa-lx106-arduino}
       export PY_PATH=${pkgs.python27}/bin
+      export ESP_IDF_LIB=${esp-idf-lib}
       alias makeesparduino="make -f ${makeEspArduino}/makeEspArduino.mk"
       echo "Welcome!"
     '';
