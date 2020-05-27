@@ -1,11 +1,13 @@
 { stdenv, fetchurl, autoPatchelfHook, zlib, ncurses5, python27 }:
 
-stdenv.mkDerivation {
-  name = "xtensa-lx106-1.22.0-92-g8facf4c-5.2.0";
+stdenv.mkDerivation rec {
+  pname = "xtensa-lx106";
+  version = "1.22.0-100-ge567ec7-5.2.0";
+  platform = "linux64"; # _TODO_ macos support
 
   src = fetchurl {
-    url = "https://dl.espressif.com/dl/xtensa-lx106-elf-linux64-1.22.0-92-g8facf4c-5.2.0.tar.gz";
-    sha256 = "0cz69nf5gz22my71zp95wgbhnnwqx5dlfws703wvxrbx0rmyr47x";
+    url = "https://dl.espressif.com/dl/${pname}-elf-${platform}-${version}.tar.gz";
+    sha256 = "1574p170cpd46pz5mpi22jsfqrj5bd7xys1gj5fzihjr6y2h4skh";
   };
 
   nativeBuildInputs = [ autoPatchelfHook stdenv.cc.cc.lib zlib ncurses5 python27 ];

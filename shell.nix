@@ -1,12 +1,11 @@
-{ nixpkgs ? <nixpkgs>
-}:
+{ nixpkgs ? import ./nixpkgs.nix }:
 let
   pkgs = import nixpkgs {};
   esp8266_rtos_sdk = pkgs.callPackage ./esp8266-rtos-sdk.nix {};
   esp8266_arduino = pkgs.callPackage ./esp8266-arduino.nix {};
   xtensa-lx106 =  pkgs.callPackage ./xtensa-lx106.nix {};
   xtensa-lx106-old = xtensa-lx106.overrideAttrs (oldAttrs: rec {
-    name = "xtensa-lx106-1.22.0-88-gde0bdc1-4.8.5";
+    version = "1.22.0-88-gde0bdc1-4.8.5";
     src = pkgs.fetchurl {
       url = "https://dl.espressif.com/dl/xtensa-lx106-elf-linux64-1.22.0-88-gde0bdc1-4.8.5.tar.gz";
       sha256 = "0ylsh9xx3cypybr1066p7d93i1ki0vvncb5vhcdvcjb35vl6lj08";
@@ -17,13 +16,20 @@ let
   esp-idf-lib = pkgs.callPackage ./esp-idf-lib.nix {};
   esp-idf = pkgs.callPackage ./esp-idf.nix {};
   xtensa-esp32 = pkgs.callPackage ./xtensa-esp32.nix {};
+  xtensa-esp32-old = xtensa-esp32.overrideAttrs (oldAttrs: rec {
+   src = pkgs.fetchurl {
+     url = "https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz";
+     sha256 = "0mji8jq1dg198z8bl50i0hs3drdqa446kvf6xpjx9ha63lanrs9z";
+   };
+  });
 in
   pkgs.stdenv.mkDerivation {
     name = "esp8266-shell";
     buildInputs = [
       esp8266_rtos_sdk esp8266_arduino
       esp-idf-lib
-      xtensa-lx106 xtensa-esp32
+      xtensa-lx106
+      xtensa-esp32
       makeEspArduino
     ] ++ (with pkgs.python27Packages; [ pyserial cryptography future pyparsing]);
 
